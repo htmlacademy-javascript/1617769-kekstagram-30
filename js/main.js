@@ -70,6 +70,6 @@ const createPhotoDescription = () => ({
   другими пользователями к этой фотографии. Количество комментариев к каждой фотографии — случайное число от 0 до 30. Все комментарии генерируются случайным образом*/
 });
 
+// eslint-disable-next-line no-unused-vars
 const photoDescriptions = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
-
-
+window.console.log(photoDescriptions);
