@@ -1,5 +1,6 @@
 import {createIdGenerator, createIdGeneratorTill25, getRandomInteger, getRandomArrayElement} from './util.js';
 
+
 const COMMENTS = ['Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -39,3 +40,4 @@ const createPhotoDescription = () => ({
 });
 // eslint-disable-next-line no-unused-vars
 const photoDescriptions = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
+export {photoDescriptions};
