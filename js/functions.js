@@ -35,7 +35,7 @@ getNumber('29 uy898 %%023 989');
 
 
 // Задание 5.2
-const isMeetingBeyondWorkday = (sw, ew, sm, md) => {
+/*const isMeetingBeyondWorkday = (sw, ew, sm, md) => {
   const startW = sw.split(':');
   const endW = ew.split(':');
   const startM = sm.split(':');
@@ -51,4 +51,13 @@ const isMeetingBeyondWorkday = (sw, ew, sm, md) => {
   return false;
 };
 
-window.console.log(isMeetingBeyondWorkday('8:00', '17:30', '08:00', 900));
+window.console.log(isMeetingBeyondWorkday('8:00', '17:30', '08:00', 900)); */
+
+
+const isMeetingBeyond = (sw, ew, sm, md) => {
+  const withoutColon = [sw, ew, sm].map((value) => value.split(':'));
+  const inMin = withoutColon.map((value) => +value[0] * 60 + +value[1]);
+  const emInMin = inMin[2] + md;
+  return (inMin[2] >= inMin[0] && emInMin <= inMin[1]);
+};
+window.console.log(isMeetingBeyond('8:00', '17:30', '08:00', 900));
