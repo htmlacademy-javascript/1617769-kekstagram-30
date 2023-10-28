@@ -5,23 +5,14 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-// Генератор уникальных чисел по порядку.
-function createIdGenerator () {
-  let lastGeneratedId = 1;
-
+function createIdGenerator (count) {
+  let lastGeneratedId = 0;
   return function () {
     lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-}
-
-function createIdGeneratorTill25 () {
-  let lastGeneratedId = 1;
-
-  return function () {
-    lastGeneratedId++;
-    if (lastGeneratedId > 25) {
-      lastGeneratedId = 1;
+    if (count) {
+      if (lastGeneratedId >= count) {
+        lastGeneratedId = 1;
+      }
     }
     return lastGeneratedId;
   };
@@ -29,4 +20,4 @@ function createIdGeneratorTill25 () {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomInteger, createIdGenerator, createIdGeneratorTill25, getRandomArrayElement};
+export {getRandomInteger, createIdGenerator, getRandomArrayElement};

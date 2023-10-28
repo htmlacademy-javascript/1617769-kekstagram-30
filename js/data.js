@@ -1,4 +1,4 @@
-import {createIdGenerator, createIdGeneratorTill25, getRandomInteger, getRandomArrayElement} from './util.js';
+import {createIdGenerator, getRandomInteger, getRandomArrayElement} from './util.js';
 
 
 const COMMENTS = ['Всё отлично!',
@@ -14,9 +14,10 @@ const DESCRIPTION = ['Редкое фото', 'Опратите внимение
 const PHOTO_DESCRIPTION_COUNT = 25;
 
 const generateCommentId = createIdGenerator();
-const generateUrlNumber = createIdGeneratorTill25();
-const generatePhotoId = createIdGeneratorTill25();
+const generateUrlNumber = createIdGenerator(PHOTO_DESCRIPTION_COUNT);
+const generatePhotoId = createIdGenerator(PHOTO_DESCRIPTION_COUNT);
 // получение случайного элемента из указанного массива
+
 const createComment = () => ({
   id: generateCommentId(),//любое число. Идентификаторы не должны повторяться
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
@@ -39,5 +40,5 @@ const createPhotoDescription = () => ({
   другими пользователями к этой фотографии. Количество комментариев к каждой фотографии — случайное число от 0 до 30. Все комментарии генерируются случайным образом*/
 });
 // eslint-disable-next-line no-unused-vars
-const photoDescriptions = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
-export {photoDescriptions};
+const getPhotoDescriptions = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
+export {getPhotoDescriptions};
