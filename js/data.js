@@ -41,4 +41,5 @@ const createPhotoDescription = () => ({
 });
 // eslint-disable-next-line no-unused-vars
 const getPhotoDescriptions = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
+
 export {getPhotoDescriptions};
