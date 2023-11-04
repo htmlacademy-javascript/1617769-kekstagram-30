@@ -1,25 +1,25 @@
-import {getPhotoDescriptions} from './data.js';
+const pictureTemplate = document
+  .querySelector('#picture')
+  .content.querySelector('.picture');
 
-const pictures = document.querySelector('.pictures'); // туда будут добавляться фото других польз
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture'); // шаблон для карточек других польз
-// const pictureTitle = document.querySelector('.pictures__title').classList.remove('visually-hidden');
-window.console.log(pictures);
+const createThumbnail = ({ id, url, description, comments, likes}) => {
+  const thumbnail = pictureTemplate.cloneNode(true);
+  thumbnail.querySelector('.picture__img').src = url;
+  thumbnail.querySelector('.picture__img').alt = description;
+  thumbnail.querySelector('.picture__comments').textContent = comments.length;
+  thumbnail.querySelector('.picture__likes').textContent = likes;
+  thumbnail.setAttribute('id', id);
+  return thumbnail;
+};
 
-const picture = pictureTemplate.cloneNode(true);
-pictures.appendChild(picture);
+const renderThumbnails = (pictures, container) => {
+  container = document.querySelector('.pictures');
+  const fragment = document.createDocumentFragment();
+  pictures.forEach((picture) => {
+    const thumbnail = createThumbnail(picture);
+    fragment.append(thumbnail);
+  });
+  container.append(fragment);
+};
 
-const similarPictures = getPhotoDescriptions();
-
-const similarListFragment = document.createDocumentFragment();
-
-window.console.log(similarPictures);
-similarPictures.forEach((pic) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = pic.url;
-  pictureElement.querySelector('.picture__img').alt = pic.description;
-  pictureElement.querySelector('.picture__likes').textContent = pic.likes;
-  pictureElement.querySelector('.picture__comments').textContent = pic.comments;
-  similarListFragment.appendChild(pictureElement);
-});
-
-pictures.appendChild(similarListFragment);
+export{renderThumbnails};
