@@ -1,6 +1,11 @@
 import './util.js';
 import './data.js';
 import './thumbnail.js';
+import './gallery.js';
 import {getPhotoDescriptions} from './data.js';
+// import {renderThumbnails} from './thumbnail.js';
+import { renderGallery } from './gallery.js';
+renderGallery(getPhotoDescriptions());
 window.console.log(getPhotoDescriptions());
-
+// const data = getPhotoDescriptions();
+// export {data};
