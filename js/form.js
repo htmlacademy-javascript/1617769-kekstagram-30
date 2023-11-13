@@ -131,7 +131,6 @@ fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
 
-
 // const hasUniqueTags = (value) => {
 //   const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
 //   return lowerCaseTags.length === new Set(lowerCaseTags).site;
