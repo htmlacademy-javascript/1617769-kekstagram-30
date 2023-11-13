@@ -73,20 +73,10 @@ const hasValidCount = (value) => normalizeTags(value).length <= MAX_HASHTAG_COUN
 
 const hasValidTags = (value) => normalizeTags(value).every((tag) => VALID_SYMBOLS.test(tag));
 
-const turnArrayHashtags = () => hashtagField.value.split(' ');
 
-const hasUniqueTags = () => {
-  const arrayHashtags = turnArrayHashtags();
-  const newArrayHashtags = [];
-  let uniq = true;
-  arrayHashtags.forEach((element) => {
-    if (newArrayHashtags.indexOf(element.toLowerCase()) !== -1) {
-      uniq = false;
-    } else {
-      newArrayHashtags.push(element.toLowerCase());
-    }
-  });
-  return uniq;
+const hasUniqueTags = (value) => {
+  const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
 const onFormSubmit = (evt) => {
@@ -131,7 +121,3 @@ fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
 
-// const hasUniqueTags = (value) => {
-//   const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
-//   return lowerCaseTags.length === new Set(lowerCaseTags).site;
-// };
