@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import { init as initEffect, reset as resetEffect } from './effect.js';
+import { resetScale } from './scale.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const MAX_COMMENT_COUNT = 140;
@@ -30,6 +32,8 @@ const isTextFieldFocused = () =>
 
 const hideModal = () => {
   form.reset();
+  resetScale();
+  resetEffect();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -90,7 +94,7 @@ pristine.addValidator(
   validateComment,
   ErrorText.INVALID_COMMENT_COUNT,
   1,
-  false
+  true
 );
 
 pristine.addValidator(
@@ -98,7 +102,7 @@ pristine.addValidator(
   hasValidCount,
   ErrorText.INVALID_COUNT,
   3,
-  false
+  true
 );
 
 pristine.addValidator(
@@ -106,7 +110,7 @@ pristine.addValidator(
   hasValidTags,
   ErrorText.INVALID_PATTERN,
   1,
-  false
+  true
 );
 
 pristine.addValidator(
@@ -114,10 +118,12 @@ pristine.addValidator(
   hasUniqueTags,
   ErrorText.NOT_UNIQUE,
   2,
-  false
+  true
 );
 
 fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
+
+initEffect();
 
