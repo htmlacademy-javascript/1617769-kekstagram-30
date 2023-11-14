@@ -10,7 +10,7 @@ function createIdGenerator (count) {
   return function () {
     lastGeneratedId += 1;
     if (count) {
-      if (lastGeneratedId >= count) {
+      if (lastGeneratedId > count) {
         lastGeneratedId = 1;
       }
     }
