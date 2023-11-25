@@ -93,7 +93,6 @@ const showPicture = (pictureData) => {
     renderComments();
   }
   // initCommentList();
-
   renderPicture(pictureData);
 };
 

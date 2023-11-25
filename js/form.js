@@ -1,6 +1,8 @@
 import {isEscapeKey} from './util.js';
 import { init as initEffect, reset as resetEffect } from './effect.js';
 import { resetScale } from './scale.js';
+import { sendPicture } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const MAX_COMMENT_COUNT = 140;
@@ -12,6 +14,11 @@ const ErrorText = {
   INVALID_COMMENT_COUNT: `Длина комментария больше ${MAX_COMMENT_COUNT} символов`,
 };
 
+const SubmitButtonCaption = {
+  SUBMITTING: 'Отправляю...',
+  IDLE: 'Опубликовать',
+};
+
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
 const overlay = form.querySelector('.img-upload__overlay');//Форма редактирования изображения
@@ -19,11 +26,19 @@ const cancelButton = form.querySelector('.img-upload__cancel');//Кнопка д
 const fileField = form.querySelector('.img-upload__input');//
 const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit');
+
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled
+    ? SubmitButtonCaption.SUBMITTING
+    : SubmitButtonCaption.IDLE;
+};
 
 const pristine = new Pristine(form, {
   classTo : 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorClass: 'img-upload__field-wrapper--error',
+  errorTextClass: 'img-upload__field-wrapper--error',
 });
 
 const isTextFieldFocused = () =>
@@ -40,8 +55,12 @@ const hideModal = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+function isErrorMessageExist() {
+  return Boolean(document.querySelector('.error'));
+}
+
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !isErrorMessageExist()) {
     evt.preventDefault();
     hideModal();
   }
@@ -83,10 +102,26 @@ const hasUniqueTags = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-const onFormSubmit = (evt) => {
+const sendForm = async (formElement) => {
   if (!pristine.validate()) {
-    evt.preventDefault();
+    return;
   }
+
+  try {
+    toggleSubmitButton(true);
+    await sendPicture(new FormData(formElement));
+    toggleSubmitButton(false);
+    hideModal();
+    showSuccessMessage();
+  } catch {
+    showErrorMessage();
+    toggleSubmitButton(false);
+  }
+};
+
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  sendForm(evt.target);
 };
 
 pristine.addValidator(
