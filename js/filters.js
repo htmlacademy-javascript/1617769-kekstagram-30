@@ -42,11 +42,14 @@ const repaint = (event, filter, data) => {
     const pictures = document.querySelectorAll('.picture');
     pictures.forEach((item) => item.remove());
     renderGallery(filteredData);
-    const currentActiveEl = filterForm.querySelector('.img-filters__button--active');
-    currentActiveEl.classList.remove('img-filters__button--active');
-    event.target.classList.add('img-filters__button--active');
     currentFilter = filter;
   }
+};
+
+const swithSelectedFilter = (event) => {
+  const currentActiveEl = filterForm.querySelector('.img-filters__button--active');
+  currentActiveEl.classList.remove('img-filters__button--active');
+  event.target.classList.add('img-filters__button--active');
 };
 
 const debouncedRepaint = debounce(repaint);
@@ -56,12 +59,16 @@ export const initFilter = (data) => {
   // const filtered = filterHandlers[FilterEnum.DISCUSSED](data);
   defaultBtn.addEventListener('click', (event) => {
     debouncedRepaint(event, FilterEnum.DEFUALT, data);
+    swithSelectedFilter(event);
   });
   randomBtn.addEventListener('click', (event) => {
     debouncedRepaint(event, FilterEnum.RANDOM, data);
+    swithSelectedFilter(event);
   });
   discussedBtn.addEventListener('click', (event) => {
     debouncedRepaint(event, FilterEnum.DISCUSSED, data);
+    swithSelectedFilter(event);
   });
 
 };
+
