@@ -5,7 +5,6 @@ const COMMENTS_COUNT_SHOW = 5;
 const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.querySelector('body');
 const closePictureButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
-
 const commentsListElement = bigPictureElement.querySelector('.social__comments');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const totalCommentCountElement = bigPictureElement.querySelector('.social__comment-total-count');
@@ -15,7 +14,6 @@ const commentElement = document
   .querySelector('#comment')
   .content
   .querySelector('.social__comment');
-
 
 let commentsCountShown = 0;
 let comments = [];
@@ -46,10 +44,8 @@ const renderComments = () => {
     fragment.append(comment);
   }
 
-
   commentsListElement.innerHTML = '';
   commentsListElement.append(fragment);
-
   commentCountElement.textContent = commentsCountShown;
   totalCommentCountElement.textContent = comments.length;
 };
@@ -92,7 +88,7 @@ const showPicture = (pictureData) => {
   if (comments.length > 0) {
     renderComments();
   }
-  // initCommentList();
+
   renderPicture(pictureData);
 };
 

@@ -11,8 +11,8 @@ const HttpMethod = {
 };
 
 const ErrorText = {
-  [HttpMethod.GET]: 'Не удалось загрузить данные. Попробуйте еще раз', // заменить с ТЗ
-  [HttpMethod.POST]: 'Не удалось отправить данные формы', // заменить с ТЗ
+  [HttpMethod.GET]: 'Не удалось загрузить данные',
+  [HttpMethod.POST]: 'Ошибка загрузки файла',
 };
 
 async function request(url, method = HttpMethod.GET, body = null) {

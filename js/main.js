@@ -11,7 +11,7 @@ async function bootstrap() {
   try {
     const data = await loadPictures();
     renderGallery(data);
-    initFilter(data); // 12
+    initFilter(data);
   } catch {
     showErrorMessage();
   }
