@@ -54,7 +54,7 @@ const swithSelectedFilter = (event) => {
 
 const debouncedRepaint = debounce(repaint);
 
-const initFilter = (data) => {
+export const initFilter = (data) => {
   filtersEl.classList.remove('img-filters--inactive');
   // const filtered = filterHandlers[FilterEnum.DISCUSSED](data);
   defaultBtn.addEventListener('click', (event) => {
@@ -72,4 +72,3 @@ const initFilter = (data) => {
 
 };
 
-export { initFilter };
