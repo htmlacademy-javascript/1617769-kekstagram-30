@@ -56,7 +56,7 @@ const debouncedRepaint = debounce(repaint);
 
 const initFilter = (data) => {
   filtersEl.classList.remove('img-filters--inactive');
-  // const filtered = filterHandlers[FilterEnum.DISCUSSED](data)
+
   defaultBtn.addEventListener('click', (event) => {
     debouncedRepaint(event, FilterEnum.DEFUALT, data);
     swithSelectedFilter(event);
