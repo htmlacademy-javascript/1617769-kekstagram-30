@@ -14,6 +14,11 @@ function showErrorMessage() {
   }, REMOVE_MESSAGE_TIMEOUT);
 }
 
+//получить случайное число
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+//получить случайный элемент из массива
+const getRandomElementFromArr = (arr) => arr[getRandomNumber(0,arr.length - 1)];
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 // Функция взята из интернета и доработана
@@ -62,5 +67,26 @@ function throttle (callback, delayBetweenFrames) {
   };
 }
 
+const getRandomElemensArr = (arr,count) => {
+  const baseArray = arr.slice();
+  const result = [];
 
-export { showErrorMessage, isEscapeKey, debounce, throttle };
+  for(let i = 0;i < count; i++){
+    const index = getRandomNumber(0,baseArray.length - 1);
+    result.push(baseArray.splice(index,1)[0]);
+  }
+
+  return result;
+};
+
+const sortObjectsByCommentsLength = (arr) => arr.slice().sort((a,b) => b.comments.length - a.comments.length);
+
+export {
+  showErrorMessage,
+  isEscapeKey,
+  debounce,
+  throttle,
+  getRandomElemensArr,
+  sortObjectsByCommentsLength,
+  getRandomElementFromArr
+};

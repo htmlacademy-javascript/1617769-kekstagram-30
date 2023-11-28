@@ -8,6 +8,7 @@ const MAX_HASHTAG_COUNT = 5;
 const MAX_COMMENT_COUNT = 140;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const ErrorText = {
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
@@ -39,10 +40,11 @@ const toggleSubmitButton = (isDisabled) => {
 };
 
 const pristine = new Pristine(form, {
-  classTo : 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
+  classTo: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
 });
+
 
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField ||
@@ -111,7 +113,6 @@ const normalizeTags = (tagString) => tagString
 const hasValidCount = (value) => normalizeTags(value).length <= MAX_HASHTAG_COUNT;
 
 const hasValidTags = (value) => normalizeTags(value).every((tag) => VALID_SYMBOLS.test(tag));
-
 
 const hasUniqueTags = (value) => {
   const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
