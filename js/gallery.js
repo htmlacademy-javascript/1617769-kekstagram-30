@@ -1,9 +1,14 @@
 import { renderThumbnails } from './thumbnail.js';
 import { showPicture} from './picture.js';
 
+
 const container = document.querySelector('.pictures');
 
-const renderGallery = (pictures) => {
+const renderGallery = (picture) => {
+  renderThumbnails(picture, container);
+};
+
+const initGalleryListeners = (picture) => {
   container.addEventListener('click', (evt) => {
     const thumbnail = evt.target.closest('a.picture[id]');
 
@@ -14,10 +19,10 @@ const renderGallery = (pictures) => {
     evt.preventDefault();
 
     const thumbnailId = +evt.target.parentNode.id;
-    const pictureData = pictures.find(({ id }) => id === thumbnailId);
+    const pictureData = picture.find(({ id }) => id === thumbnailId);
     showPicture(pictureData);
   });
-  renderThumbnails(pictures, container);
 };
 
-export { renderGallery };
+
+export { renderGallery, initGalleryListeners };
