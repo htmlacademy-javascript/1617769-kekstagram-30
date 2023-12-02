@@ -1,7 +1,6 @@
 import { renderThumbnails } from './thumbnail.js';
 import { showPicture} from './picture.js';
 
-
 const container = document.querySelector('.pictures');
 
 const renderGallery = (picture) => {
@@ -23,6 +22,5 @@ const initGalleryListeners = (picture) => {
     showPicture(pictureData);
   });
 };
-
 
 export { renderGallery, initGalleryListeners };
