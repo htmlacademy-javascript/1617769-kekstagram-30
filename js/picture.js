@@ -84,7 +84,7 @@ const showPicture = (pictureData) => {
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
-  comments = pictureData.comments;
+  comments = pictureData.comments || [];
   if (comments.length > 0) {
     renderComments();
   }
